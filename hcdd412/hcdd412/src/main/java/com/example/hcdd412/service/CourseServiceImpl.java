@@ -1,11 +1,11 @@
-// Inside src/main/java/com/example/hcdd412/service/CourseServiceImpl.java
-
 package com.example.hcdd412.service;
 
 import com.example.hcdd412.model.Course;
+import com.example.hcdd412.model.Student;
 import com.example.hcdd412.repository.CourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -32,7 +32,15 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    @Transactional
     public void deleteCourseById(long id) {
-        this.courseRepository.deleteById(id);
+
+        Course course = courseRepository.findById(id).orElseThrow(() -> new RuntimeException("Course not found"));
+
+        for (Student student : course.getStudents()) {
+            student.getCourses().remove(course);
+        }
+
+        this.courseRepository.delete(course);
     }
 }
