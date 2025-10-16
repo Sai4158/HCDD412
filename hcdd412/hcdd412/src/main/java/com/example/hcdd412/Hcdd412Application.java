@@ -9,5 +9,4 @@ public class Hcdd412Application {
 	public static void main(String[] args) {
 		SpringApplication.run(Hcdd412Application.class, args);
 	}
-
 }

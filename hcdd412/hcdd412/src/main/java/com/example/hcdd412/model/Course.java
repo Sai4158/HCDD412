@@ -1,7 +1,6 @@
 package com.example.hcdd412.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.HashSet;
@@ -39,8 +38,10 @@ public class Course implements Serializable {
     public void setCourseNum(String courseNum) { this.courseNum = courseNum; }
     public String getCourseName() { return courseName; }
     public void setCourseName(String courseName) { this.courseName = courseName; }
+
     public String getCourseStuds() { return courseStuds; }
     public void setCourseStuds(String courseStuds) { this.courseStuds = courseStuds; }
+
     public Set<Student> getStudents() { return students; }
     public void setStudents(Set<Student> students) { this.students = students; }
 }

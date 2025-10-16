@@ -18,9 +18,10 @@ public class StudentServiceImplTest {
     @Autowired
     private StudentRepository studentRepository;
 
-    // This method runs before each test to set up some data
     @BeforeEach
     void setUp() {
+        studentRepository.deleteAll();
+
         Student student = new Student();
         student.setStudName("Sai Rangineeni");
         student.setStudEmail("sai@example.com");
@@ -29,19 +30,21 @@ public class StudentServiceImplTest {
 
     @Test
     void testGetAllStudents() {
-        // Find all students in the database
+
         List<Student> students = studentRepository.findAll();
-        // Check that we found exactly 1 student
+
         assertEquals(1, students.size());
     }
 
     @Test
     void testFindOne() {
-        // Try to find the first student (ID should be 1)
-        Optional<Student> studentOptional = studentRepository.findById(1L);
-        // Make sure the student was found
+        List<Student> students = studentRepository.findAll();
+        Long studentId = students.get(0).getSid();
+
+        Optional<Student> studentOptional = studentRepository.findById(studentId);
+
         assertTrue(studentOptional.isPresent());
-        // Check if the student's name is correct
+
         assertEquals("Sai Rangineeni", studentOptional.get().getStudName());
     }
 }

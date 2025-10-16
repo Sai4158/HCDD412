@@ -27,7 +27,7 @@ public class CourseController {
 
     @GetMapping("/showNewCourseForm")
     public String showNewCourseForm(Model model) {
-        // create model attribute to bind form data
+
         Course course = new Course();
         model.addAttribute("course", course);
         return "new_course";
@@ -42,17 +42,20 @@ public class CourseController {
 
     @GetMapping("/showFormForUpdate/{id}")
     public String showFormForUpdate(@PathVariable(value = "id") long id, Model model) {
+
         // get course from the service
         Optional<Course> courseOptional = courseService.getCourseById(id);
         Course course = courseOptional.orElseThrow(() -> new RuntimeException("Course not found"));
-        // set course as a model attribute to pre-populate the form
+
+
         model.addAttribute("course", course);
         return "update_course";
     }
 
     @GetMapping("/deleteCourse/{id}")
     public String deleteCourse(@PathVariable(value = "id") long id) {
-        // call delete course method
+
+
         this.courseService.deleteCourseById(id);
         return "redirect:/";
     }
