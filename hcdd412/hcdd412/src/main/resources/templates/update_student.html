@@ -1,0 +1,37 @@
+<!-- Inside src/main/resources/templates/update_student.html -->
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="ISO-8859-1">
+  <title>Student Management System</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+  <h1>Student Management System</h1>
+  <hr>
+  <h2>Update Student</h2>
+  <form action="#" th:action="@{/saveStudent}" th_object="${student}" method="POST">
+
+    <!-- Add hidden form field to handle update -->
+    <input type="hidden" th:field="*{sid}" />
+
+    <input type="text" th:field="*{studName}" class="form-control mb-4 col-4">
+    <input type="text" th:field="*{studEmail}" class="form-control mb-4 col-4">
+
+    <div class="col-lg-3">
+      <select class="form-control" th:field="*{courses}" multiple="multiple">
+        <option th:each="course : ${allCourses}"
+                th:value="${course.id}"
+                th:text="${course.courseName}"></option>
+      </select>
+    </div>
+    <br>
+    <button type="submit" class="btn btn-info col-2"> Update Student</button>
+  </form>
+  <hr>
+  <a th:href="@{/studentList}"> Back to Student List</a>
+</div>
+</body>
+</html>

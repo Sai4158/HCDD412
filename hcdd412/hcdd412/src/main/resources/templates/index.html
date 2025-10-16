@@ -1,10 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Course Management System</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-Hello World
+<div class="container my-2">
+    <h1>Courses List</h1>
+    <a th:href="@{/showNewCourseForm}" class="btn btn-primary btn-sm mb-3"> Add Course </a>
+    <a th:href="@{/studentList}" class="btn btn-primary btn-sm mb-3"> View Students </a>
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Course Department</th>
+            <th>Course Number</th>
+            <th>Course Name</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${listCourses}">
+            <td th:text="${course.courseDept}"></td>
+            <td th:text="${course.courseNum}"></td>
+            <td th:text="${course.courseName}"></td>
+            <td>
+                <a th:href="@{/showFormForUpdate/{id}(id=${course.id})}" class="btn btn-primary">Update</a>
+                <a th:href="@{/deleteCourse/{id}(id=${course.id})}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
 </body>
 </html>
